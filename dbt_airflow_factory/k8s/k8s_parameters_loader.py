@@ -24,6 +24,9 @@ class KubernetesExecutionParametersLoader:
 
     @staticmethod
     def _update_config_if_datahub_exits(config: dict, datahub_config: dict) -> dict:
+        if "envs" not in config:
+            config["envs"] = {}
+
         if datahub_config:
             config["envs"].update({"DATAHUB_GMS_URL": datahub_config["sink"]["config"]["server"]})
         return config
